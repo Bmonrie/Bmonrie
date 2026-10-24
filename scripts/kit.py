@@ -1,6 +1,7 @@
 """Piezas comunes de las láminas: paleta, tipografía embebida, medida de texto, animación y envoltorio SVG.
 
-Una sola familia, Anybody (variable en peso y anchura), recortada a los caracteres que se usan.
+Una sola familia, Archivo (variable en peso y anchura, la del perfil del trabajo), recortada a los
+caracteres que se usan.
 Los pocos glifos japoneses de la maqueta de Kakurega salen de un recorte de Noto Sans JP.
 """
 import base64
@@ -29,7 +30,7 @@ W = 1000  # ancho de lámina de escritorio
 M = 48  # margen de escritorio
 PW, PM = 400, 20  # ancho y margen de las láminas de teléfono
 
-_FONT = FONTS / "anybody.ttf"
+_FONT = FONTS / "archivo.woff2"
 _JP = FONTS / "notosansjp-sub.ttf"
 
 
@@ -56,7 +57,7 @@ def set_charset(chars):
     global _css
     _css = (
         "@font-face{font-family:'A';src:url(data:font/woff2;base64,%s) format('woff2');"
-        "font-weight:100 900;font-stretch:50%% 150%%}"
+        "font-weight:100 900;font-stretch:62%% 125%%}"
         "@font-face{font-family:'J';src:url(data:font/woff2;base64,%s) format('woff2');font-weight:100 900}"
         % (_woff2(_FONT, chars + string.printable + "·×—–’“”«»"), _woff2(_JP))
     )

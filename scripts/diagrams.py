@@ -1,4 +1,4 @@
-"""Diagramas de arquitectura y tiras de pasos, con el oficio de un diagrama de documentación técnica.
+"""Diagramas de arquitectura, con el oficio de un diagrama de documentación técnica.
 
 - Zonas: campos de tono muy claro que agrupan por capa (cliente, borde, servidor…), con su rótulo.
 - Tarjetas: esquina suave, borde fino, un glifo en su ficha, título y una línea. Todas las de un diagrama
@@ -292,57 +292,3 @@ def wavesling(L, phone=False):
     lg, ly = legend(R[2] + ch + 18 + 44, L)
     out.append(lg)
     return "".join(out), ly + 8
-
-
-# ─── La tira de pasos: cómo funciona, en cuatro tarjetas iguales ─────────────
-def _chip(x, y, g, key, size=48):
-    return (f'<rect x="{x:.1f}" y="{y:.1f}" width="{size}" height="{size}" rx="10" fill="{BLUE if key else CHIP}"/>'
-            + glyph(g, x + (size - 28) / 2, y + (size - 28) / 2, PAPER if key else INK, 28, 1.8))
-
-
-def steps(items, icons_, key, phone=False):
-    """items: [(título, línea)] · icons_: glifo por paso · key: índice del paso en azul."""
-    out = []
-    if not phone:
-        bw, gx = (904 - 3 * 34) / 4, 34
-        bh = max(98 + (len(wrap(t, T, bw - 28, 700)) - 1) * 23 + 6 + len(wrap(s, S, bw - 28)) * 22 for t, s in items) + 16
-        cards = []
-        for i, ((t, s), ic) in enumerate(zip(items, icons_)):
-            x = i * (bw + gx)
-            k = key == i
-            out.append(f'<rect x="{x:.1f}" y="0" width="{bw:.1f}" height="{bh:.1f}" rx="8" fill="{KEYFILL if k else PAPER}" '
-                       f'stroke="{BLUE if k else EDGE}" stroke-width="{2 if k else 1.6}"/>')
-            out.append(_chip(x + 16, 16, ic, k))
-            y = 98
-            for ln in wrap(t, T, bw - 28, 700):
-                out.append(text(x + 16, y, ln, T, INK, 700))
-                y += 23
-            y += 6
-            for ln in wrap(s, S, bw - 28):
-                out.append(text(x + 16, y, ln, S, MUTED))
-                y += 22
-            cards.append(x)
-        for i in range(1, 4):
-            out.append(link((cards[i - 1] + bw, 40), (cards[i], 40)))
-        return "".join(out), bh
-    tw = CW - 80 - 14
-    bh = max(max(92, 30 + len(wrap(t, T, tw, 700)) * 23 + len(wrap(s, S, tw)) * 22 + 10) for t, s in items)
-    gy = 36
-    for i, ((t, s), ic) in enumerate(zip(items, icons_)):
-        y = i * (bh + gy)
-        k = key == i
-        out.append(f'<rect x="0" y="{y:.1f}" width="{CW}" height="{bh:.1f}" rx="8" fill="{KEYFILL if k else PAPER}" '
-                   f'stroke="{BLUE if k else EDGE}" stroke-width="{2 if k else 1.6}"/>')
-        out.append(_chip(16, y + (bh - 48) / 2, ic, k))
-        tl, sl = wrap(t, T, tw, 700), wrap(s, S, tw)
-        yy = y + (bh - (len(tl) * 23 + len(sl) * 22)) / 2 + 17
-        for ln in tl:
-            out.append(text(80, yy, ln, T, INK, 700))
-            yy += 23
-        yy += 2
-        for ln in sl:
-            out.append(text(80, yy, ln, S, MUTED))
-            yy += 22
-        if i:
-            out.append(link((40, y - gy), (40, y)))
-    return "".join(out), 4 * bh + 3 * gy
