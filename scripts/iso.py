@@ -1,7 +1,7 @@
 """Dibujo isométrico para las figuras explicativas.
 
 Un solo estilo para todas: contorno de tinta de grosor fijo, caras planas en tres tonos (la de arriba
-la más clara) y el amarillo reservado para la pieza que hace funcionar cada sistema.
+la más clara) y el azul reservado para la pieza que hace funcionar el sistema.
 
 Ejes: x baja hacia la derecha, y baja hacia la izquierda, z sube. Se ven la cara de arriba, la de
 delante a la izquierda (plano y = y + d) y la de delante a la derecha (plano x = x + w). El orden de
@@ -9,18 +9,18 @@ pintado es cosa de quien dibuja: de atrás (x + y pequeño) hacia delante.
 """
 import math
 
-from kit import INK, YELLOW
+from kit import BLUE, INK
 
 C30 = math.cos(math.radians(30))
 SW = 2.2  # contorno
 SW_FINE = 1.4  # detalle
 
 # Tonos (arriba, delante-izquierda, delante-derecha)
-WHITE = ("#FFFFFF", "#DCDEE2", "#B9BCC3")
-FLOOR = ("#F4F5F6", "#DFE1E5", "#C9CCD2")
-YELL = (YELLOW, "#F2B705", "#D39A00")
-DARK = ("#3B3D43", "#26282D", "#16171A")
-GREY = ("#C9CCD2", "#A9ADB5", "#8E929B")
+WHITE = ("#FFFFFF", "#E7F3F5", "#C9DFF2")
+FLOOR = ("#F4F9FB", "#DCEBF5", "#C2D8EC")
+ACCENT = (BLUE, "#005FAD", "#004C8C")
+DARK = ("#2B3199", "#171C8F", "#10146B")
+GREY = ("#C9DFF2", "#A8C7E3", "#8DB3D6")
 
 
 def _pts(points):

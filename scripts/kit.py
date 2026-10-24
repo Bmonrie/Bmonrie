@@ -1,7 +1,7 @@
-"""Piezas comunes de las láminas: paleta, tipografía embebida, medida de texto y envoltorio SVG.
+"""Piezas comunes de las láminas: paleta, tipografía embebida, medida de texto, animación y envoltorio SVG.
 
 Una sola familia, Anybody (variable en peso y anchura), recortada a los caracteres que se usan.
-Los pocos glifos japoneses de la figura de Kakurega salen de un recorte de Noto Sans JP.
+Los pocos glifos japoneses de la maqueta de Kakurega salen de un recorte de Noto Sans JP.
 """
 import base64
 import io
@@ -17,13 +17,17 @@ from fontTools.varLib.instancer import instantiateVariableFont
 ROOT = Path(__file__).resolve().parent.parent
 FONTS = ROOT / "scripts" / "fonts"
 
-# ─── Paleta: papel, tinta y un amarillo que marca la pieza que importa ───────
-PAPER, INK, YELLOW = "#FFFFFF", "#0B0B0C", "#FFD23F"
-STONE = "#ECEDEF"  # página gris: un escalón de tono, nunca una línea
-MUTED = "#45474D"  # texto secundario sobre papel o piedra
-ON_INK, ON_INK_SOFT = "#FFFFFF", "#B5B8BF"
-W = 1000  # ancho de lámina
-M = 48  # margen
+# ─── Paleta: la del perfil del trabajo. Índigo de tinta, un azul que marca lo que importa ──
+PAPER, INK, BLUE = "#FFFFFF", "#171C8F", "#0072CE"
+STONE = "#E7F3F5"  # página de tono: un escalón, nunca una línea
+PALE = "#C9DFF2"  # azul claro: subrayados, casillas, caras de los dibujos
+NOVA = "#4AA7B7"  # segundo acento, solo donde el azul no se leería
+MUTED = "#475569"  # texto secundario sobre papel o tono
+ON_INK, ON_INK_SOFT = "#FFFFFF", "#A9AEDB"  # texto sobre el campo índigo
+ON_BLUE_SOFT = "#D6E9F8"  # texto secundario sobre el campo azul
+W = 1000  # ancho de lámina de escritorio
+M = 48  # margen de escritorio
+PW, PM = 400, 20  # ancho y margen de las láminas de teléfono
 
 _FONT = FONTS / "anybody.ttf"
 _JP = FONTS / "notosansjp-sub.ttf"
@@ -62,6 +66,18 @@ BASE_CSS = (
     "text{font-family:'A','Helvetica Neue',Arial,sans-serif;font-kerning:normal}"
     ".j{font-family:'J',sans-serif}"
     ".n{font-variant-numeric:tabular-nums}"
+    # Movimiento: el flujo de las flechas, un pulso, un cursor, un giro y el crecer de una barra
+    ".flow{stroke-dasharray:5 11;animation:flow 1.1s linear infinite}"
+    "@keyframes flow{to{stroke-dashoffset:-16}}"
+    ".pulse{animation:pulse 2.4s ease-in-out infinite}"
+    "@keyframes pulse{50%{opacity:.3}}"
+    ".blink{animation:blink 1.1s steps(1) infinite}"
+    "@keyframes blink{50%{opacity:0}}"
+    ".spin{transform-box:view-box;animation:spin 8s linear infinite}"
+    "@keyframes spin{to{transform:rotate(360deg)}}"
+    ".grow{transform-box:fill-box;transform-origin:50% 100%;animation:grow 1.1s cubic-bezier(.16,1,.3,1) backwards}"
+    "@keyframes grow{from{transform:scaleY(0)}}"
+    "@media (prefers-reduced-motion:reduce){*{animation:none!important}}"
 )
 
 _metrics = {}
@@ -150,6 +166,12 @@ def rich(x, y, s, size, maxw, fill=INK, bold_fill=None, lead=1.45, wght=400, bol
         out.append(text(x, y, spans, size, fill, wght, raw=True).replace("<text ", '<text xml:space="preserve" ', 1))
         y += size * lead
     return "".join(out), y
+
+
+def flow(x1, y1, x2, y2, color=PAPER, sw=2.2):
+    """Trazo animado encima de una flecha: el sentido del flujo, en movimiento."""
+    return (f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="{color}" stroke-width="{sw}" '
+            f'stroke-linecap="butt" class="flow"/>')
 
 
 def svg(h, body, title, fill=PAPER, w=W):

@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Genera el README de perfil de Bmonrie: un número de revista sobre un solo ingeniero.
+"""Genera el README de perfil de Bmonrie: un número de revista sobre un solo ingeniero, en azul.
 
-Portada, carta con el sumario, un reportaje por proyecto (figura isométrica, maqueta del producto y
-diagrama de arquitectura) y contraportada. Todas las imágenes están dibujadas en código con el mismo
-trazo; ninguna es una captura. Inglés primero (README.md), luego español y catalán.
+Portada con la escalera de lo que hace falta para llevar IA a producción, carrusel de tecnologías, carta
+con el sumario, dos páginas por proyecto (maqueta del producto; cómo funciona en cuatro pasos, arquitectura
+y datos) y contraportada. Todo está dibujado en código; nada es una captura. Cada lámina tiene versión de
+escritorio (assets/) y de teléfono (assets/m/), y el README elige con <picture>. Inglés primero.
 
 Uso:
     python scripts/build.py            # intenta leer el último Short del canal; si no hay red, usa data/
@@ -20,8 +21,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import diagrams  # noqa: E402
 import figures  # noqa: E402
 import mockups  # noqa: E402
-from kit import (INK, M, MUTED, ON_INK, ON_INK_SOFT, PAPER, ROOT, STONE, W, YELLOW, block, esc, fit,  # noqa: E402
-                 rich, set_charset, svg, text, width, wrap)
+from kit import (BLUE, INK, M, MUTED, ON_BLUE_SOFT, ON_INK, ON_INK_SOFT, PALE, PAPER, PM, PW, ROOT, STONE, W,  # noqa: E402
+                 block, esc, fit, rich, set_charset, svg, text, width)
 
 ASSETS = ROOT / "assets"
 LATEST = ROOT / "data" / "latest-short.json"
@@ -34,7 +35,8 @@ CAP = 0.675  # altura de mayúscula de Anybody
 TXT = {
     "en": dict(
         name="English",
-        meta="Bruno Monreal · AI & Data Manager · Barcelona",
+        alt_marquee="Tech I work with: Python, TypeScript, FastAPI, LangGraph, MCP, RAG, PostgreSQL, React, Docker and more",
+        meta="AI & Data Manager · Barcelona",
         headline="Builds the whole thing.",
         standfirst="AI agents, products and pipelines, from the model to the deploy, left running in production.",
         layers=[
@@ -59,7 +61,8 @@ TXT = {
     ),
     "es": dict(
         name="Español",
-        meta="Bruno Monreal · AI & Data Manager · Barcelona",
+        alt_marquee="Tecnologías con las que trabajo: Python, TypeScript, FastAPI, LangGraph, MCP, RAG, PostgreSQL, React, Docker y más",
+        meta="AI & Data Manager · Barcelona",
         headline="Construye el sistema entero.",
         standfirst="Agentes, productos y pipelines con IA, del modelo al despliegue, y funcionando en producción.",
         layers=[
@@ -80,11 +83,12 @@ TXT = {
         colophon=("Compuesto en Anybody. Todas las figuras, maquetas y diagramas de este número están dibujados en "
                   "código a partir de los propios proyectos."),
         date=lambda d: f"{d.day} {['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'][d.month - 1]} {d.year}",
-        pct=lambda v: f"{v:g} %".replace(".", ","),
+        pct=lambda v: f"{v:g} %".replace(".", ","),
     ),
     "ca": dict(
         name="Català",
-        meta="Bruno Monreal · AI & Data Manager · Barcelona",
+        alt_marquee="Tecnologies amb què treballo: Python, TypeScript, FastAPI, LangGraph, MCP, RAG, PostgreSQL, React, Docker i més",
+        meta="AI & Data Manager · Barcelona",
         headline="Construeix el sistema sencer.",
         standfirst="Agents, productes i pipelines amb IA, del model al desplegament, i funcionant en producció.",
         layers=[
@@ -105,7 +109,7 @@ TXT = {
         colophon=("Compost en Anybody. Totes les figures, maquetes i diagrames d'aquest número estan dibuixats en "
                   "codi a partir dels mateixos projectes."),
         date=lambda d: f"{d.day} {['gen.', 'febr.', 'març', 'abr.', 'maig', 'juny', 'jul.', 'ag.', 'set.', 'oct.', 'nov.', 'des.'][d.month - 1]} {d.year}",
-        pct=lambda v: f"{v:g} %".replace(".", ","),
+        pct=lambda v: f"{v:g} %".replace(".", ","),
     ),
 }
 
@@ -136,7 +140,7 @@ PROJECTS = [
                   "host": "Hetzner · Docker Compose", "caddy": ("Caddy", "HTTPS and the static web"),
                   "api": ("API", "FastAPI: study, reader, dictionary"), "ocr": ("OCR worker", "ONNX Runtime, one page at a time"),
                   "db": ("PostgreSQL 17", "Users, progress, OCR queue"),
-                  "content": ("Read-only content", "JMdict, KANJIDIC and grammar, shipped with each process"),
+                  "content": ("Read-only content", "JMdict, KANJIDIC and grammar"),
                   "ships": "How it ships", "deploy": [("Push to pro", "The production branch"), ("Tests", "Backend, web and browser"),
                              ("arm64 images", "Built and pushed"), ("Swap when healthy", "The old API keeps serving")]},
         ),
@@ -153,7 +157,7 @@ PROJECTS = [
             mock_caption="El lector: toca cualquier palabra para ver su lectura, su significado y sus kanji, sobre la página real.",
             arch_caption="Una API, un proceso de OCR y un Postgres detrás de Caddy y Cloudflare; cada versión entra sin cortes.",
             fig={"work": ("Tu manga, novela o anime", "Se sube tal cual: CBZ, EPUB, PDF o subtítulos."),
-                 "analyze": ("Lo que ya sabes", "El OCR lee cada bocadillo; la meta es el 90 % de sus palabras."),
+                 "analyze": ("Lo que ya sabes", "El OCR lee cada bocadillo; la meta es el 90 % de sus palabras."),
                  "lessons": ("Lecciones de esa obra", "Primero sus kanji y palabras, con repasos FSRS."),
                  "reader": ("Léela con ayuda", "Un diccionario emergente sobre la página real.")},
             mock={"nav": ["Inicio", "Niveles", "Gramática", "Biblioteca", "Diccionario"], "common": "Común",
@@ -162,7 +166,7 @@ PROJECTS = [
                   "host": "Hetzner · Docker Compose", "caddy": ("Caddy", "HTTPS y la web estática"),
                   "api": ("API", "FastAPI: estudio, lector, diccionario"), "ocr": ("Proceso de OCR", "ONNX Runtime, página a página"),
                   "db": ("PostgreSQL 17", "Usuarios, progreso, cola de OCR"),
-                  "content": ("Contenido de solo lectura", "JMdict, KANJIDIC y gramática, dentro de cada proceso"),
+                  "content": ("Contenido fijo", "JMdict, KANJIDIC y gramática"),
                   "ships": "Cómo se publica", "deploy": [("Push a pro", "La rama de producción"), ("Tests", "Backend, web y navegador"),
                              ("Imágenes arm64", "Se construyen y suben"), ("Relevo en sano", "La API vieja sigue sirviendo")]},
         ),
@@ -179,7 +183,7 @@ PROJECTS = [
             mock_caption="El lector: toca qualsevol paraula per veure'n la lectura, el significat i els kanji, sobre la pàgina real.",
             arch_caption="Una API, un procés d'OCR i un Postgres darrere de Caddy i Cloudflare; cada versió entra sense talls.",
             fig={"work": ("El teu manga, novel·la o anime", "S'hi puja tal qual: CBZ, EPUB, PDF o subtítols."),
-                 "analyze": ("El que ja saps", "L'OCR llegeix cada bafarada; l'objectiu és el 90 % de les paraules."),
+                 "analyze": ("El que ja saps", "L'OCR llegeix cada bafarada; l'objectiu és el 90 % de les paraules."),
                  "lessons": ("Lliçons d'aquella obra", "Primer els seus kanji i paraules, amb repassos FSRS."),
                  "reader": ("Llegeix-la amb ajuda", "Un diccionari emergent sobre la pàgina real.")},
             mock={"nav": ["Inici", "Nivells", "Gramàtica", "Biblioteca", "Diccionari"], "common": "Comú",
@@ -188,7 +192,7 @@ PROJECTS = [
                   "host": "Hetzner · Docker Compose", "caddy": ("Caddy", "HTTPS i la web estàtica"),
                   "api": ("API", "FastAPI: estudi, lector, diccionari"), "ocr": ("Procés d'OCR", "ONNX Runtime, pàgina a pàgina"),
                   "db": ("PostgreSQL 17", "Usuaris, progrés, cua d'OCR"),
-                  "content": ("Contingut de només lectura", "JMdict, KANJIDIC i gramàtica, dins de cada procés"),
+                  "content": ("Contingut fix", "JMdict, KANJIDIC i gramàtica"),
                   "ships": "Com es publica", "deploy": [("Push a pro", "La branca de producció"), ("Tests", "Backend, web i navegador"),
                              ("Imatges arm64", "Es construeixen i es pugen"), ("Relleu en sa", "L'API vella continua servint")]},
         ),
@@ -216,11 +220,11 @@ PROJECTS = [
                   "slots": [("13:17", "Which piece?", "One piece is covered and three are offered. Only one mates."),
                             ("18:17", "Brilliant or blunder?", "One move is drawn on the board. Half of them are traps."),
                             ("23:17", "The trap", "A real opening trap from a Lichess game, punished on screen.")]},
-            arch={"analyst": "Once: puzzles and analysis, baked into the repo", "daily": "Every day, unattended", "baked": "baked analysis",
+            arch={"analyst": "Once: puzzles and their analysis, baked into the repo", "daily": "Every day, unattended", "baked": "baked analysis",
                   "lichess": ("Lichess", "Puzzles and real games"), "stockfish": ("Stockfish", "Verifies and annotates"),
                   "remotion": ("Remotion", "React, one per format"), "youtube": ("YouTube", "Data API upload"),
-                  "actions": ("GitHub Actions", "Three slots, a DST gate and catch-up passes"),
-                  "ledger": ("published.json", "The only memory: what went out and when, committed back so nothing goes out twice"),
+                  "actions": ("GitHub Actions", "Three slots and catch-up runs"),
+                  "ledger": ("published.json", "The ledger: nothing goes out twice"), "actions_phone": ("GitHub Actions", "Renders with Remotion, three slots a day"),
                   "weekly": "Every Monday", "stats": ("stats.ts", "Reads the ledger"),
                   "analytics": ("YouTube Analytics", "Retention per video"), "statsjson": ("stats.json", "Week-on-week series")},
         ),
@@ -247,8 +251,8 @@ PROJECTS = [
             arch={"analyst": "Una vez: puzles y análisis, fijados en el repo", "daily": "Cada día, sin nadie", "baked": "análisis fijado",
                   "lichess": ("Lichess", "Puzles y partidas reales"), "stockfish": ("Stockfish", "Verifica y anota"),
                   "remotion": ("Remotion", "React, una por formato"), "youtube": ("YouTube", "Subida por Data API"),
-                  "actions": ("GitHub Actions", "Tres franjas, filtro de horario y pasadas de recuperación"),
-                  "ledger": ("published.json", "La única memoria: qué salió y cuándo, de vuelta al repo para que nada salga dos veces"),
+                  "actions": ("GitHub Actions", "Tres franjas y pasadas de recuperación"),
+                  "ledger": ("published.json", "El registro: nada sale dos veces"), "actions_phone": ("GitHub Actions", "Renderiza con Remotion, tres franjas al día"),
                   "weekly": "Cada lunes", "stats": ("stats.ts", "Lee el registro"),
                   "analytics": ("YouTube Analytics", "Retención por vídeo"), "statsjson": ("stats.json", "Serie semana a semana")},
         ),
@@ -275,8 +279,8 @@ PROJECTS = [
             arch={"analyst": "Un cop: trencaclosques i anàlisi, fixats al repo", "daily": "Cada dia, sense ningú", "baked": "anàlisi fixada",
                   "lichess": ("Lichess", "Trencaclosques i partides reals"), "stockfish": ("Stockfish", "Verifica i anota"),
                   "remotion": ("Remotion", "React, una per format"), "youtube": ("YouTube", "Pujada per Data API"),
-                  "actions": ("GitHub Actions", "Tres franges, filtre d'horari i passades de recuperació"),
-                  "ledger": ("published.json", "L'única memòria: què ha sortit i quan, de tornada al repo perquè res no surti dos cops"),
+                  "actions": ("GitHub Actions", "Tres franges i passades de recuperació"),
+                  "ledger": ("published.json", "El registre: res no surt dos cops"), "actions_phone": ("GitHub Actions", "Renderitza amb Remotion, tres franges al dia"),
                   "weekly": "Cada dilluns", "stats": ("stats.ts", "Llegeix el registre"),
                   "analytics": ("YouTube Analytics", "Retenció per vídeo"), "statsjson": ("stats.json", "Sèrie setmana a setmana")},
         ),
@@ -381,7 +385,7 @@ PROJECTS = [
                    "**A BFS solver** that guarantees every daily puzzle has a single solution.",
                    "**Bot Elo** calibrated in a round robin, and a minimax AI to play against.",
                    "**Works offline** and is served from Cloudflare."],
-            fig_caption="Drawn games in simulated AI-versus-AI play, under the classic rules and under the tide rules.",
+            fig_caption="One direction moves every piece; the rules were chosen by simulating games.",
             mock_caption="The daily puzzle: pick a direction and every piece that answers it moves at once.",
             arch_caption="One engine, imported by everything else, so the rules can only live in one place.",
             fig={"before": "Classic rules", "after": "Tide rules",
@@ -390,22 +394,22 @@ PROJECTS = [
             mock={"tabs": ["classic", "arcade", "crowd"], "heading": "each piece keeps its move",
                   "body": "A rook is still a rook. You send a tide, and every piece that travels that way goes at once.",
                   "caption": "rook · straight, until something stops it", "pad": "Eight directions"},
-            arch={"engine": ("Engine", "Pure TypeScript, zero dependencies. tide.ts is the only way in."),
-                  "web": ("Web app", "React and Vite"), "server": ("Server", "Cloudflare, leaderboards only"),
+            arch={"engine": ("Engine", "Pure TypeScript, zero dependencies"), "others": ("Everything else", "Game modes, generator and simulator"),
+                  "web": ("Web app and server", "React, Vite, Cloudflare"), "server": ("Server", "Cloudflare, leaderboards only"),
                   "game": ("Game modes", "Daily, arcade, duel and Elo"), "generator": ("Generator", "Writes the puzzle bank"),
                   "autoplay": ("Simulator", "AI against AI, to measure the rules"), "tests": ("Tests", "Normative vectors"),
                   "imports": "import"},
         ),
         es=dict(
             what="Un juego de navegador",
-            headline="Las tablas bajaron del 71,9 % al 23 %.",
+            headline="Las tablas bajaron del 71,9 % al 23 %.",
             standfirst=("WavesLing es un puzle diario en un tablero de 5×5 donde cada marea mueve a la vez tus piezas y "
                         "las del rival. Sus reglas, su apertura y los precios de sus piezas se decidieron simulando partidas, no por gusto."),
             facts=["**Un solo motor** en TypeScript puro, sin dependencias, compartido por la web, el servidor, el generador y el simulador.",
                    "**Un solver BFS** que garantiza que cada puzle diario tiene una única solución.",
                    "**Elo de los rivales** calibrado en un round robin, y una IA minimax contra la que jugar.",
                    "**Funciona sin conexión** y se sirve desde Cloudflare."],
-            fig_caption="Partidas en tablas en juego simulado IA contra IA, con las reglas clásicas y con las de marea.",
+            fig_caption="Una dirección mueve todas las piezas; las reglas se eligieron simulando partidas.",
             mock_caption="El puzle del día: eliges una dirección y todas las piezas que responden a ella se mueven a la vez.",
             arch_caption="Un solo motor, que importa todo lo demás, para que las reglas solo puedan vivir en un sitio.",
             fig={"before": "Reglas clásicas", "after": "Reglas de marea",
@@ -414,22 +418,22 @@ PROJECTS = [
             mock={"tabs": ["classic", "arcade", "crowd"], "heading": "cada pieza conserva su movimiento",
                   "body": "Una torre sigue siendo una torre. Envías una marea y todas las piezas que van en esa dirección se mueven a la vez.",
                   "caption": "torre · recto, hasta que algo la para", "pad": "Ocho direcciones"},
-            arch={"engine": ("Motor", "TypeScript puro, sin dependencias. tide.ts es la única puerta."),
-                  "web": ("Web", "React y Vite"), "server": ("Servidor", "Cloudflare, solo clasificaciones"),
+            arch={"engine": ("Motor", "TypeScript puro, sin dependencias"), "others": ("Todo lo demás", "Modos de juego, generador y simulador"),
+                  "web": ("Web y servidor", "React, Vite, Cloudflare"), "server": ("Servidor", "Cloudflare, solo clasificaciones"),
                   "game": ("Modos de juego", "Diario, arcade, duelo y Elo"), "generator": ("Generador", "Escribe el banco de puzles"),
                   "autoplay": ("Simulador", "IA contra IA, para medir las reglas"), "tests": ("Tests", "Vectores normativos"),
                   "imports": "importan"},
         ),
         ca=dict(
             what="Un joc de navegador",
-            headline="Les taules van baixar del 71,9 % al 23 %.",
+            headline="Les taules van baixar del 71,9 % al 23 %.",
             standfirst=("WavesLing és un trencaclosques diari en un tauler de 5×5 on cada marea mou alhora les teves "
                         "peces i les del rival. Les regles, l'obertura i els preus de les peces es van decidir simulant partides, no per gust."),
             facts=["**Un sol motor** en TypeScript pur, sense dependències, compartit per la web, el servidor, el generador i el simulador.",
                    "**Un solver BFS** que garanteix que cada trencaclosques diari té una única solució.",
                    "**Elo dels rivals** calibrat en un round robin, i una IA minimax contra la qual jugar.",
                    "**Funciona sense connexió** i se serveix des de Cloudflare."],
-            fig_caption="Partides en taules en joc simulat IA contra IA, amb les regles clàssiques i amb les de marea.",
+            fig_caption="Una direcció mou totes les peces; les regles es van triar simulant partides.",
             mock_caption="El trencaclosques del dia: tries una direcció i totes les peces que hi responen es mouen alhora.",
             arch_caption="Un sol motor, que importa tota la resta, perquè les regles només puguin viure en un lloc.",
             fig={"before": "Regles clàssiques", "after": "Regles de marea",
@@ -438,15 +442,31 @@ PROJECTS = [
             mock={"tabs": ["classic", "arcade", "crowd"], "heading": "cada peça conserva el seu moviment",
                   "body": "Una torre continua sent una torre. Hi envies una marea i totes les peces que van en aquella direcció es mouen alhora.",
                   "caption": "torre · recte, fins que alguna cosa l'atura", "pad": "Vuit direccions"},
-            arch={"engine": ("Motor", "TypeScript pur, sense dependències. tide.ts és l'única porta."),
-                  "web": ("Web", "React i Vite"), "server": ("Servidor", "Cloudflare, només classificacions"),
+            arch={"engine": ("Motor", "TypeScript pur, sense dependències"), "others": ("Tota la resta", "Modes de joc, generador i simulador"),
+                  "web": ("Web i servidor", "React, Vite, Cloudflare"), "server": ("Servidor", "Cloudflare, només classificacions"),
                   "game": ("Modes de joc", "Diari, arcade, duel i Elo"), "generator": ("Generador", "Escriu el banc de trencaclosques"),
                   "autoplay": ("Simulador", "IA contra IA, per mesurar les regles"), "tests": ("Tests", "Vectors normatius"),
                   "imports": "importen"},
         ),
     ),
 ]
+# Los pasos de «cómo funciona»: Kakurega y BlunderLing reutilizan sus rótulos; los otros dos, los suyos
+_STEPS = {('agents', 'en'): [('An agent is a folder', 'YAML, a prompt, tools and evals.'), ('The core runs it', 'Loop, memory and multi-agent, with no SDKs.'), ('Policies decide', 'What runs, what asks a human, what is denied.'), ('Any model answers', 'Anthropic, OpenAI, Azure, vLLM or Ollama.')], ('agents', 'es'): [('Un agente es una carpeta', 'YAML, un prompt, herramientas y evals.'), ('El núcleo lo ejecuta', 'Bucle, memoria y multiagente, sin SDKs.'), ('Las políticas deciden', 'Qué se ejecuta, qué pregunta a una persona y qué se deniega.'), ('Responde cualquier modelo', 'Anthropic, OpenAI, Azure, vLLM u Ollama.')], ('agents', 'ca'): [('Un agent és una carpeta', 'YAML, un prompt, eines i evals.'), ("El nucli l'executa", 'Bucle, memòria i multiagent, sense SDKs.'), ('Les polítiques decideixen', "Què s'executa, què pregunta a una persona i què es denega."), ('Respon qualsevol model', 'Anthropic, OpenAI, Azure, vLLM o Ollama.')], ('wavesling', 'en'): [('Pick a direction', 'One of eight, once per turn.'), ('Every piece answers', "Yours and your rival's, at the same time."), ('Simulate both rules', 'AI against AI, game after game.'), ('Keep the better rule', 'Draws fell from 71.9% to 23%.')], ('wavesling', 'es'): [('Eliges una dirección', 'Una de ocho, una vez por turno.'), ('Responden todas las piezas', 'Las tuyas y las del rival, a la vez.'), ('Simula las dos reglas', 'IA contra IA, partida tras partida.'), ('Se queda la mejor', 'Las tablas bajaron del 71,9 % al 23 %.')], ('wavesling', 'ca'): [('Tries una direcció', 'Una de vuit, un cop per torn.'), ('Responen totes les peces', 'Les teves i les del rival, alhora.'), ('Simula les dues regles', 'IA contra IA, partida rere partida.'), ('Es queda la millor', 'Les taules van baixar del 71,9 % al 23 %.')]}
+for _p in PROJECTS:
+    for _l in TXT:
+        _P = _p[_l]
+        _P["steps"] = _STEPS.get((_p["key"], _l)) or [v for v in _P["fig"].values() if isinstance(v, tuple)]
+
+
 GROUND = {"kakurega": PAPER, "blunderling": STONE, "agents": PAPER, "wavesling": STONE}
+# Cómo funciona cada proyecto: los iconos de sus cuatro pasos y cuál va en azul
+STEP_ICONS = {"kakurega": (["book", "gauge", "cards", "reader"], 2),
+              "blunderling": (["database", "engine", "phone", "upload"], 3),
+              "agents": (["folder", "loop", "shield", "models"], 1),
+              "wavesling": (["pad", "tide", "versus", "bars"], 3)}
+TECH = ["Python", "TypeScript", "FastAPI", "LangGraph", "MCP", "RAG", "pgvector", "PostgreSQL", "vLLM", "Next.js",
+        "React", "Remotion", "ONNX Runtime", "FSRS", "Stockfish", "Docker", "GitHub Actions", "OpenTelemetry",
+        "Langfuse", "Cloudflare"]
 
 
 # ─── El último Short, para que la página cambie sola ────────────────────────
@@ -474,194 +494,238 @@ def _short_bits(lang):
 
 
 # ─── Piezas de página ────────────────────────────────────────────────────────
+def geo(phone):
+    """Ancho, margen y medida de la lámina."""
+    return (PW, PM, PW - 2 * PM) if phone else (W, M, W - 2 * M)
+
+
 def arrow(x, y, color, s=11):
     return (f'<path d="M{x:.1f} {y:.1f}L{x + s:.1f} {y - s:.1f}M{x + 2:.1f} {y - s:.1f}H{x + s:.1f}V{y - 2:.1f}" '
             f'stroke="{color}" stroke-width="2.4" fill="none" stroke-linecap="round"/>')
 
 
-def headline(y, s, fill=INK, maxw=W - 2 * M, sizes=(84, 76, 68, 60, 54)):
-    size, lines = fit(s, maxw, sizes, 800, 112, -0.03)
+def headline(y, s, fill=INK, phone=False, sizes=None):
+    _, m, cw = geo(phone)
+    sizes = sizes or ((44, 40, 36, 32) if phone else (84, 76, 68, 60, 54))
+    size, lines = fit(s, cw, sizes, 800, 112, -0.03, 3 if phone else 2)
     out = []
     for i, ln in enumerate(lines):
-        out.append(text(M - 3, y + size * CAP + i * size * 1.02, ln, size, fill, 800, 112, track=-0.03))
-    return "".join(out), y + size * CAP + (len(lines) - 1) * size * 1.02
+        out.append(text(m - 2, y + size * CAP + i * size * 1.04, ln, size, fill, 800, 112, track=-0.03))
+    return "".join(out), y + size * CAP + (len(lines) - 1) * size * 1.04
 
 
-def _ink_bounds():
-    """Huecos laterales de la M y de la L en la instancia del masthead, para medir la tinta y no la caja."""
-    from fontTools.pens.boundsPen import BoundsPen
-    from fontTools.ttLib import TTFont
-    from fontTools.varLib.instancer import instantiateVariableFont
-    f = instantiateVariableFont(TTFont(ROOT / "scripts" / "fonts" / "anybody.ttf"), {"wght": 900, "wdth": 150})
-    gs, cmap, upm = f.getGlyphSet(), f.getBestCmap(), f["head"].unitsPerEm
-    out = []
-    for ch in "ML":
-        pen = BoundsPen(gs)
-        gs[cmap[ord(ch)]].draw(pen)
-        out.append((pen.bounds, f["hmtx"][cmap[ord(ch)]][0]))
-    (m_b, _), (l_b, l_adv) = out
-    return m_b[0] / upm, (l_adv - l_b[2]) / upm
+def name_block(y, phone=False, fill=PAPER, dot=INK):
+    """«Bruno» y «Monreal.» en dos líneas, la segunda de margen a margen, como en el perfil del trabajo."""
+    _, m, cw = geo(phone)
+    track = -0.03
+    size = cw / width("Monreal.", 1, 900, 125, track)
+    lead = size * 0.9
+    b = [text(m - size * 0.04, y + size * CAP, "Bruno", round(size, 1), fill, 900, 125, track=track),
+         text(m - size * 0.04, y + size * CAP + lead, f'<tspan>Monreal</tspan><tspan fill="{dot}">.</tspan>',
+              round(size, 1), fill, 900, 125, track=track, raw=True)]
+    return "".join(b), y + size * CAP + lead
 
 
-LSB, RSB = _ink_bounds()
+def name_line(y, phone=False, fill=PAPER):
+    """«Bruno Monreal» en una línea, de margen a margen."""
+    _, m, cw = geo(phone)
+    size = cw / width("Bruno Monreal", 1, 900, 125, -0.02)
+    return text(m - size * 0.03, y + size * CAP, "Bruno Monreal", round(size, 1), fill, 900, 125, track=-0.02), y + size * CAP
 
 
-def masthead(y, fill=INK):
-    """MONREAL de margen a margen: la tinta, no la caja, ocupa exactamente la medida."""
-    track = -0.01
-    unit = width("MONREAL", 1, 900, 150, track) - track - LSB - RSB  # ancho de tinta por punto
-    size = (W - 2 * M) / unit
-    return (text(M - LSB * size, y + size * CAP, "MONREAL", round(size, 1), fill, 900, 150, track=track),
-            y + size * CAP)
-
-
-def caption(x, y, s, maxw=W - 2 * M, fill=MUTED):
-    return block(x, y, s, 19, maxw, fill, 500, lead=1.4)
+def caption(x, y, s, maxw, fill=MUTED, phone=False):
+    return block(x, y, s, 18 if phone else 19, maxw, fill, 500, lead=1.4)
 
 
 # ─── Láminas ─────────────────────────────────────────────────────────────────
-def cover(lang):
+def cover(lang, phone=False):
     L = TXT[lang]
-    b = []
-    mh, y = masthead(40)
-    b.append(mh)
-    y += 46
-    b.append(text(M, y, L["meta"], 22, INK, 600))
-    h, y = headline(y + 50, L["headline"])
+    w, m, cw = geo(phone)
+    nb, y = name_block(30 if phone else 44, phone)
+    b = [nb]
+    y += 30 if phone else 46
+    b.append(text(m, y, L["meta"], 18 if phone else 22, PAPER, 600))
+    h, y = headline(y + (34 if phone else 50), L["headline"], PAPER, phone, (42, 38, 34) if phone else (80, 72, 64))
     b.append(h)
-    s, y = block(M, y + 54, L["standfirst"], 28, 760, INK, 500, lead=1.35)
+    s, y = block(m, y + (34 if phone else 54), L["standfirst"], 20 if phone else 28, cw if phone else 760, ON_BLUE_SOFT, 500, lead=1.38)
     b.append(s)
-    top = y + 12
-    fig, fh = figures.stack(L)
-    b.append(f'<rect x="0" y="{top:.0f}" width="{W}" height="{fh + 60:.0f}" fill="{PAPER}"/>')
-    b.append(f'<g transform="translate({M} {top + 30:.0f})">{fig}</g>')
-    alt = f'MONREAL. {L["meta"]}. {L["headline"]} {L["standfirst"]}'
-    return svg(top + fh + 60, "".join(b), alt, YELLOW)
+    top = y + (2 if phone else 12)
+    fig, fh = figures.stack(L, phone)
+    if not phone:
+        b.append(f'<rect x="0" y="{top:.0f}" width="{w}" height="{fh + 60:.0f}" fill="{PAPER}"/>')
+        b.append(f'<g transform="translate({m} {top + 30:.0f})">{fig}</g>')
+        end = top + fh + 60
+    else:  # en teléfono, la escalera sola y debajo sus capas, en el mismo orden
+        ly = top + 24 + fh + 10
+        parts = []
+        for title, line in L["layers"]:
+            parts.append(text(m, ly, title, 20, INK, 700))
+            t, ly = block(m, ly + 25, line, 18, cw, MUTED, 400, lead=1.35)
+            parts.append(t)
+            ly += 12
+        b.append(f'<rect x="0" y="{top:.0f}" width="{w}" height="{ly - top + 14:.0f}" fill="{PAPER}"/>')
+        b.append(f'<g transform="translate({m} {top + 24:.0f})">{fig}</g>')
+        b += parts
+        end = ly + 14
+    alt = f'Bruno Monreal. {L["meta"]}. {L["headline"]} {L["standfirst"]}'
+    return svg(end, "".join(b), alt, BLUE, w)
 
 
-def letter(lang):
+def marquee():
+    """El carrusel: las tecnologías pasan en bucle, como en el perfil del trabajo."""
+    H = 112
+    parts, x = [], 0.0
+    for t in TECH:
+        parts.append(text(x, 74, t, 56, INK, 600, track=-0.02))
+        x += width(t, 56, 600, track=-0.02) + 30
+        parts.append(f'<rect x="{x:.1f}" y="49" width="14" height="14" fill="{BLUE}"/>')
+        x += 14 + 30
+    row = "".join(parts)
+    copies = int(W / x) + 2
+    track = "".join(f'<g transform="translate({x * k:.1f} 0)">{row}</g>' for k in range(copies))
+    css = (f"<style>.track{{animation:slide {x / 45:.1f}s linear infinite}}"
+           f"@keyframes slide{{to{{transform:translateX(-{x:.1f}px)}}}}</style>")
+    return svg(H, css + f'<g class="track">{track}</g>', TXT["en"]["alt_marquee"], STONE)
+
+
+def letter(lang, phone=False):
     L = TXT[lang]
-    h, y = headline(56, L["letter_title"], ON_INK, sizes=(64, 56, 48))
+    w, m, cw = geo(phone)
+    h, y = headline(36 if phone else 56, L["letter_title"], ON_INK, phone, (34, 30) if phone else (64, 56, 48))
     b = [h]
-    top = y + 56
-    lead, ly = block(M, top, L["letter_lead"], 28, 420, ON_INK, 600, lead=1.35)
-    body, ly = block(M, ly + 16, L["letter_body"], 22, 420, ON_INK, 400, lead=1.5)
-    b += [lead, body, text(M, ly + 22, "Bruno Monreal", 26, YELLOW, 800, 110)]
+    top = y + (36 if phone else 56)
+    col = cw if phone else 420
+    lead, ly = block(m, top, L["letter_lead"], 22 if phone else 28, col, ON_INK, 600, lead=1.35)
+    body, ly = block(m, ly + 14, L["letter_body"], 19 if phone else 22, col, ON_INK, 400, lead=1.5)
+    b += [lead, body, text(m, ly + 18, "Bruno Monreal", 24 if phone else 26, PALE, 800, 110)]
     ly += 40
-    rx = 540
-    ry = top + 26
+    rx, ry = (m, ly + 40) if phone else (540, top - 24)
     for p in PROJECTS:
         P = p[lang]
-        b.append(text(rx, ry, p["name"], 30, ON_INK, 800, 108))
-        b.append(text(rx, ry + 30, P["what"], 20, ON_INK_SOFT))
-        b.append(text(rx, ry + 56, p["link"][1] if p["link"] else L["private"], 20, ON_INK_SOFT, 600))
-        ry += 98
+        b.append(text(rx, ry, p["name"], 26 if phone else 30, ON_INK, 800, 108))
+        b.append(text(rx, ry + 28, P["what"], 18 if phone else 20, ON_INK_SOFT))
+        b.append(text(rx, ry + 54, p["link"][1] if p["link"] else L["private"], 18 if phone else 20, ON_INK_SOFT, 600))
+        ry += 92 if phone else 98
     alt = f'{L["letter_title"]} {L["letter_lead"]} {L["letter_body"]}'
-    return svg(max(ly, ry) + 30, "".join(b), alt, INK)
+    return svg(max(ly, ry) + 24, "".join(b), alt, INK, w)
 
 
-def feature_a(lang, p):
-    """La primera página del reportaje: titular, entradilla y la figura de cómo funciona."""
+def feature_a(lang, p, phone=False):
+    """La primera página del reportaje: titular, entradilla y la maqueta del producto."""
     L, P = TXT[lang], p[lang]
-    b = []
-    h, y = headline(56, P["headline"])
-    b.append(h)
-    s, y = block(M, y + 54, P["standfirst"], 26, 800, INK, 500, lead=1.4)
+    w, m, cw = geo(phone)
+    h, y = headline(36 if phone else 56, P["headline"], INK, phone)
+    b = [h]
+    s, y = block(m, y + (34 if phone else 54), P["standfirst"], 20 if phone else 26, cw if phone else 800, INK, 500, lead=1.4)
     b.append(s)
-    fig, fh = getattr(figures, p["key"])(dict(fig=P["fig"] | {"fmt": L["pct"]}, layers=L["layers"]))
-    top = y + 20
-    b.append(f'<g transform="translate({M} {top:.0f})">{fig}</g>')
-    c, y = caption(M, top + fh + 30, P["fig_caption"])
-    b.append(c)
-    alt = f'{p["name"]}. {P["headline"]} {P["standfirst"]} {P["fig_caption"]}'
-    return svg(y + 30, "".join(b), alt, GROUND[p["key"]])
-
-
-def feature_b(lang, p):
-    """La segunda: la maqueta del producto, su arquitectura y los datos."""
-    L, P = TXT[lang], p[lang]
-    ground = GROUND[p["key"]]
-    b = []
-    mock, mh = getattr(mockups, p["key"])(dict(mock=P["mock"] | ({"title": SHORT["title"]} if p["key"] == "blunderling" else {})))
-    b.append(f'<g transform="translate({M} 48)">{mock}</g>')
+    extra = {"title": SHORT["title"]} if p["key"] == "blunderling" else {}
+    mock, mh = getattr(mockups, p["key"])(dict(mock=P["mock"] | extra), phone)
+    top = y + (14 if phone else 24)
+    b.append(f'<g transform="translate({m} {top:.0f})">{mock}</g>')
     cap_text = P["mock_caption"]
     if "{title}" in cap_text:
         title, date = _short_bits(lang)
         cap_text = cap_text.format(title=title, date=date)
-    c, y = caption(M, 48 + mh + 36, cap_text)
+    c, y = caption(m, top + mh + 34, cap_text, cw, phone=phone)
     b.append(c)
-    arch_fn = getattr(diagrams, p["key"])
-    diagrams.TINT = STONE if ground == PAPER else PAPER
-    diagrams.GROUND = ground
-    arch, ah = arch_fn(dict(arch=P["arch"]))
-    top = y + 40
-    b.append(f'<g transform="translate({M} {top:.0f})">{arch}</g>')
-    c, y = caption(M, top + ah + 40, P["arch_caption"])
+    alt = f'{p["name"]}. {P["headline"]} {P["standfirst"]} {cap_text}'
+    return svg(y + 20, "".join(b), alt, GROUND[p["key"]], w)
+
+
+def feature_b(lang, p, phone=False):
+    """La segunda: cómo funciona en cuatro pasos, la arquitectura, los datos y el enlace."""
+    L, P = TXT[lang], p[lang]
+    w, m, cw = geo(phone)
+    icons_, key = STEP_ICONS[p["key"]]
+    b = []
+    st, sh = diagrams.steps(P["steps"], icons_, key, phone)
+    top = 36 if phone else 48
+    b.append(f'<g transform="translate({m} {top})">{st}</g>')
+    c, y = caption(m, top + sh + 34, P["fig_caption"], cw, phone=phone)
     b.append(c)
-    # Los datos, en dos columnas
-    y += 44
-    colw = (W - 2 * M - 48) / 2
-    ys = [y, y]
-    for i, f in enumerate(P["facts"]):
-        col = i % 2
-        t, ny = rich(M + col * (colw + 48), ys[col], f, 22, colw, INK, INK, lead=1.45)
-        b.append(t)
-        ys[col] = ny + 18
-    y = max(ys) + 10
-    b.append(text(M, y, f'{L["built"]} {p["stack"]}', 19, MUTED, 600))
-    y += 52
+    arch, ah = getattr(diagrams, p["key"])(dict(arch=P["arch"]), phone)
+    top = y + (30 if phone else 40)
+    b.append(f'<g transform="translate({m} {top:.0f})">{arch}</g>')
+    c, y = caption(m, top + ah + 34, P["arch_caption"], cw, phone=phone)
+    b.append(c)
+    y += 34 if phone else 44
+    if phone:
+        for f in P["facts"]:
+            t, y = rich(m, y, f, 20, cw, INK, INK, lead=1.45)
+            b.append(t)
+            y += 14
+    else:
+        colw = (cw - 48) / 2
+        ys = [y, y]
+        for i, f in enumerate(P["facts"]):
+            col = i % 2
+            t, ny = rich(m + col * (colw + 48), ys[col], f, 22, colw, INK, INK, lead=1.45)
+            b.append(t)
+            ys[col] = ny + 18
+        y = max(ys)
+    y += 6
+    built, y = block(m, y, f'{L["built"]} {p["stack"]}', 18 if phone else 19, cw, MUTED, 600, lead=1.4)
+    b.append(built)
+    y += 22 if phone else 26
     if p["link"]:
         lab = p["link"][1]
-        b.append(text(M, y, lab, 24, INK, 800) + arrow(M + width(lab, 24, 800) + 12, y - 3, INK, 12))
+        sz = 22 if phone else 24
+        b.append(text(m, y, lab, sz, BLUE, 800) + arrow(m + width(lab, sz, 800) + 12, y - 3, BLUE, 12))
     else:
-        b.append(text(M, y, L["private"], 24, MUTED, 700))
-    alt = f'{p["name"]}. {P["mock_caption"].split(":")[0]}. {P["arch_caption"]} ' + " ".join(f.replace("**", "") for f in P["facts"])
-    return svg(y + 48, "".join(b), alt, ground)
+        b.append(text(m, y, L["private"], 22 if phone else 24, MUTED, 700))
+    alt = (f'{p["name"]}. {P["fig_caption"]} {P["arch_caption"]} '
+           + " ".join(f.replace("**", "") for f in P["facts"]))
+    return svg(y + (30 if phone else 44), "".join(b), alt, GROUND[p["key"]], w)
 
 
-def back(lang):
+def back(lang, phone=False):
     L = TXT[lang]
-    h, y = headline(64, L["back_title"], sizes=(76, 68, 60, 54))
+    w, m, cw = geo(phone)
+    h, y = headline(36 if phone else 64, L["back_title"], PAPER, phone, (38, 34, 30) if phone else (76, 68, 60, 54))
     b = [h]
-    y += 70
+    y += 50 if phone else 70
     lab = LINKEDIN[1]
-    b.append(text(M, y, lab, 30, INK, 800) + arrow(M + width(lab, 30, 800) + 14, y - 4, INK, 14))
-    c, y = block(M, y + 50, L["colophon"], 20, 640, INK, 500, lead=1.45)
+    sz, wg = (18, 600) if phone else (30, 800)
+    b.append(text(m, y, lab, sz, PAPER, wg) + arrow(m + width(lab, sz, wg) + 8, y - 3, PAPER, 9 if phone else 14))
+    c, y = block(m, y + (36 if phone else 50), L["colophon"], 18 if phone else 20, cw if phone else 640, ON_BLUE_SOFT, 500, lead=1.45)
     b.append(c)
-    mh, y = masthead(y + 40)
-    b.append(mh)
-    return svg(y + 44, "".join(b), f'{L["back_title"]} LinkedIn: {lab}', YELLOW)
+    nl, y = name_line(y + (24 if phone else 40), phone)
+    b.append(nl)
+    return svg(y + (28 if phone else 44), "".join(b), f'{L["back_title"]} LinkedIn: {lab}', BLUE, w)
 
 
 def lang_link(code, on):
     w, h = 150, 46
     name = TXT[code]["name"]
-    body = text(w / 2, 30, name, 20, YELLOW if on else INK, 800 if on else 600, anchor="middle")
-    return svg(h, body, name, INK if on else YELLOW, w)
+    body = text(w / 2, 30, name, 20, PAPER if on else INK, 800 if on else 600, anchor="middle")
+    return svg(h, body, name, INK if on else PALE, w)
 
 
 # ─── README ──────────────────────────────────────────────────────────────────
 FILES = {"en": "README.md", "es": "README.es.md", "ca": "README.ca.md"}
+PHONE_QUERY = "(max-width: 640px)"
 
 
 def readme(lang):
     L = TXT[lang]
 
-    def img(src, alt, href=None):
-        tag = f'<img src="assets/{src}" width="100%" alt="{esc(alt)}" />'
+    def pic(name, alt, href=None):
+        tag = (f'<picture><source media="{PHONE_QUERY}" srcset="assets/m/{name}">'
+               f'<img src="assets/{name}" width="100%" alt="{esc(alt)}" /></picture>')
         return f'<a href="{href}">{tag}</a>' if href else tag
 
     links = "\n  ".join(
         f'<a href="{REPO_URL}/{FILES[c]}"><img src="assets/lang-{c}-{"on" if c == lang else "off"}.svg" height="40" alt="{TXT[c]["name"]}" /></a>'
         for c in TXT)
     body = [f'<p align="right">\n  {links}\n</p>',
-            img(f"cover-{lang}.svg", f'MONREAL. {L["meta"]}. {L["headline"]}'),
-            img(f"letter-{lang}.svg", L["letter_title"])]
+            pic(f"cover-{lang}.svg", f'Bruno Monreal. {L["meta"]}. {L["headline"]}'),
+            f'<img src="assets/marquee.svg" width="100%" alt="{esc(L["alt_marquee"])}" />',
+            pic(f"letter-{lang}.svg", L["letter_title"])]
     for p in PROJECTS:
         href = p["link"][0] if p["link"] else None
-        body.append(img(f'{p["key"]}-1-{lang}.svg', f'{p["name"]}. {p[lang]["headline"]}', href))
-        body.append(img(f'{p["key"]}-2-{lang}.svg', f'{p["name"]}. {p[lang]["arch_caption"]}', href))
-    body.append(img(f"back-{lang}.svg", L["back_title"], LINKEDIN[0]))
+        body.append(pic(f'{p["key"]}-1-{lang}.svg', f'{p["name"]}. {p[lang]["headline"]}', href))
+        body.append(pic(f'{p["key"]}-2-{lang}.svg', f'{p["name"]}. {p[lang]["arch_caption"]}', href))
+    body.append(pic(f"back-{lang}.svg", L["back_title"], LINKEDIN[0]))
     (ROOT / FILES[lang]).write_text("\n\n".join(body) + "\n", encoding="utf-8")
 
 
@@ -675,22 +739,24 @@ def _all_text():
             return "".join(walk(x) for x in v)
         return ""
     extra = "".join(TXT[c]["date"](dt.date(2026, m, 28)) + TXT[c]["pct"](71.9) for c in TXT for m in range(1, 13))
-    return walk([TXT, PROJECTS, LINKEDIN]) + SHORT["title"] + extra + "MONREAL"
+    return walk([TXT, PROJECTS, LINKEDIN, TECH]) + SHORT["title"] + extra + "Bruno Monreal."
 
 
 def main():
     set_charset(_all_text())
-    ASSETS.mkdir(exist_ok=True)
-    for old in ASSETS.glob("*.svg"):
+    (ASSETS / "m").mkdir(parents=True, exist_ok=True)
+    for old in list(ASSETS.glob("*.svg")) + list((ASSETS / "m").glob("*.svg")):
         old.unlink()
-    out = {}
+    out = {"marquee.svg": marquee()}
     for lang in TXT:
-        out[f"cover-{lang}.svg"] = cover(lang)
-        out[f"letter-{lang}.svg"] = letter(lang)
-        for p in PROJECTS:
-            out[f'{p["key"]}-1-{lang}.svg'] = feature_a(lang, p)
-            out[f'{p["key"]}-2-{lang}.svg'] = feature_b(lang, p)
-        out[f"back-{lang}.svg"] = back(lang)
+        for phone in (False, True):
+            d = "m/" if phone else ""
+            out[f"{d}cover-{lang}.svg"] = cover(lang, phone)
+            out[f"{d}letter-{lang}.svg"] = letter(lang, phone)
+            for p in PROJECTS:
+                out[f'{d}{p["key"]}-1-{lang}.svg'] = feature_a(lang, p, phone)
+                out[f'{d}{p["key"]}-2-{lang}.svg'] = feature_b(lang, p, phone)
+            out[f"{d}back-{lang}.svg"] = back(lang, phone)
         for on in (True, False):
             out[f"lang-{lang}-{'on' if on else 'off'}.svg"] = lang_link(lang, on)
         readme(lang)
