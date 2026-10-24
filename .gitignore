@@ -1,2 +1,8 @@
 _preview.html
 __pycache__/
+# Notas de diseño locales: no se publican
+PRODUCT.md
+DESIGN.md
+.impeccable/
+.taste-skill/
+.src/

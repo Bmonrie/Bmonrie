@@ -1,23 +1,27 @@
 <p align="right">
-  <a href="https://github.com/Bmonrie/Bmonrie/blob/main/README.md"><img src="assets/lang-es-off.svg" height="40" alt="Español" /></a>
+  <a href="https://github.com/Bmonrie/Bmonrie/blob/main/README.md"><img src="assets/lang-en-off.svg" height="40" alt="English" /></a>
+  <a href="https://github.com/Bmonrie/Bmonrie/blob/main/README.es.md"><img src="assets/lang-es-off.svg" height="40" alt="Español" /></a>
   <a href="https://github.com/Bmonrie/Bmonrie/blob/main/README.ca.md"><img src="assets/lang-ca-on.svg" height="40" alt="Català" /></a>
-  <a href="https://github.com/Bmonrie/Bmonrie/blob/main/README.en.md"><img src="assets/lang-en-off.svg" height="40" alt="English" /></a>
 </p>
 
-<img src="assets/hero-ca.svg" width="100%" alt="Bruno Monreal, AI Engineer a Barcelona. El que sé fer: agents d'IA fiables, producte de cap a cap, automatització desatesa i decisions amb dades." />
+<img src="assets/cover-ca.svg" width="100%" alt="MONREAL. Bruno Monreal · AI &amp; Data Manager · Barcelona. Construeix el sistema sencer." />
 
-<img src="assets/marquee.svg" width="100%" alt="Tecnologies: Python, TypeScript, FastAPI, MCP, RAG, PostgreSQL, React, Docker…" />
+<img src="assets/letter-ca.svg" width="100%" alt="Quatre projectes, una persona." />
 
-<img src="assets/about-ca.svg" width="100%" alt="Sobre mi i com treballo" />
+<a href="https://kakuregalearn.com"><img src="assets/kakurega-1-ca.svg" width="100%" alt="Kakurega. Japonès, ensenyat amb el teu manga." /></a>
 
-<img src="assets/projects-ca.svg" width="100%" alt="Projectes que ho demostren" />
+<a href="https://kakuregalearn.com"><img src="assets/kakurega-2-ca.svg" width="100%" alt="Kakurega. Una API, un procés d'OCR i un Postgres darrere de Caddy i Cloudflare; cada versió entra sense talls." /></a>
 
-<img src="assets/agents-ca.svg" width="100%" alt="Template_Agents. Base de producció per a agents conversacionals. Un nucli sense SDKs de proveïdor: el codi orquestra i el LLM només raona. Un agent nou és una carpeta de dades (YAML, prompt, eines i evals), no codi nou." />
+<a href="https://www.youtube.com/@BlunderLing"><img src="assets/blunderling-1-ca.svg" width="100%" alt="BlunderLing. Tres Shorts al dia. Ningú prem publicar." /></a>
 
-<a href="https://kakuregalearn.com"><img src="assets/kakurega-ca.svg" width="100%" alt="Kakurega. Aprendre japonès amb el que vols llegir i veure. Hi puges una novel·la, un manga o un anime amb subtítols: et diu quant n'entens, què et falta i adapta les lliçons a aquella obra. En producció." /></a>
+<a href="https://www.youtube.com/@BlunderLing"><img src="assets/blunderling-2-ca.svg" width="100%" alt="BlunderLing. L'anàlisi del motor es fa un cop i queda fixada; una GitHub Action fa la resta cada dia." /></a>
 
-<a href="https://www.youtube.com/@BlunderLing"><img src="assets/blunderling-ca.svg" width="100%" alt="BlunderLing. La fàbrica de vídeos darrere del canal @BlunderLing. Tres Shorts d'escacs al dia: importats de dades obertes, verificats amb motor, renderitzats, titulats i publicats sense que ningú miri. Cost per vídeo: zero." /></a>
+<img src="assets/agents-1-ca.svg" width="100%" alt="Template_Agents. El codi orquestra. El model només raona." />
 
-<a href="https://wavesling.pages.dev"><img src="assets/wavesling-ca.svg" width="100%" alt="WavesLing. Trencaclosques de tauler diari al navegador, amb motor propi. Un tauler de 5×5 on cada marea mou alhora les teves peces i les del rival. Les regles, l'obertura i els preus es van decidir simulant partides, no per gust." /></a>
+<img src="assets/agents-2-ca.svg" width="100%" alt="Template_Agents. Ports i adaptadors: el nucli no parla mai directament amb un proveïdor." />
 
-<a href="https://www.linkedin.com/in/brunomonrealpujol"><img src="assets/footer-ca.svg" width="100%" alt="Parlem del que vols construir: el meu LinkedIn" /></a>
+<a href="https://wavesbyling.com"><img src="assets/wavesling-1-ca.svg" width="100%" alt="WavesLing. Les taules van baixar del 71,9 % al 23 %." /></a>
+
+<a href="https://wavesbyling.com"><img src="assets/wavesling-2-ca.svg" width="100%" alt="WavesLing. Un sol motor, que importa tota la resta, perquè les regles només puguin viure en un lloc." /></a>
+
+<a href="https://www.linkedin.com/in/brunomonrealpujol"><img src="assets/back-ca.svg" width="100%" alt="Necessites el sistema sencer? Parlem." /></a>

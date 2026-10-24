@@ -1,23 +1,27 @@
 <p align="right">
-  <a href="https://github.com/Bmonrie/Bmonrie/blob/main/README.md"><img src="assets/lang-es-on.svg" height="40" alt="Español" /></a>
+  <a href="https://github.com/Bmonrie/Bmonrie/blob/main/README.md"><img src="assets/lang-en-on.svg" height="40" alt="English" /></a>
+  <a href="https://github.com/Bmonrie/Bmonrie/blob/main/README.es.md"><img src="assets/lang-es-off.svg" height="40" alt="Español" /></a>
   <a href="https://github.com/Bmonrie/Bmonrie/blob/main/README.ca.md"><img src="assets/lang-ca-off.svg" height="40" alt="Català" /></a>
-  <a href="https://github.com/Bmonrie/Bmonrie/blob/main/README.en.md"><img src="assets/lang-en-off.svg" height="40" alt="English" /></a>
 </p>
 
-<img src="assets/hero-es.svg" width="100%" alt="Bruno Monreal, AI Engineer en Barcelona. Lo que sé hacer: agentes de IA fiables, producto de punta a punta, automatización desatendida y decisiones con datos." />
+<img src="assets/cover-en.svg" width="100%" alt="MONREAL. Bruno Monreal · AI &amp; Data Manager · Barcelona. Builds the whole thing." />
 
-<img src="assets/marquee.svg" width="100%" alt="Tecnologías: Python, TypeScript, FastAPI, MCP, RAG, PostgreSQL, React, Docker…" />
+<img src="assets/letter-en.svg" width="100%" alt="Four projects, one person." />
 
-<img src="assets/about-es.svg" width="100%" alt="Sobre mí y cómo trabajo" />
+<a href="https://kakuregalearn.com"><img src="assets/kakurega-1-en.svg" width="100%" alt="Kakurega. Japanese, taught from your manga." /></a>
 
-<img src="assets/projects-es.svg" width="100%" alt="Proyectos que lo demuestran" />
+<a href="https://kakuregalearn.com"><img src="assets/kakurega-2-en.svg" width="100%" alt="Kakurega. One API, one OCR worker and one Postgres behind Caddy and Cloudflare; every release swaps in without downtime." /></a>
 
-<img src="assets/agents-es.svg" width="100%" alt="Template_Agents. Base de producción para agentes conversacionales. Un núcleo sin SDKs de proveedor: el código orquesta y el LLM solo razona. Un agente nuevo es una carpeta de datos (YAML, prompt, herramientas y evals), no código nuevo." />
+<a href="https://www.youtube.com/@BlunderLing"><img src="assets/blunderling-1-en.svg" width="100%" alt="BlunderLing. Three Shorts a day. Nobody presses publish." /></a>
 
-<a href="https://kakuregalearn.com"><img src="assets/kakurega-es.svg" width="100%" alt="Kakurega. Aprender japonés con lo que quieres leer y ver. Subes una novela, un manga o un anime con subtítulos: te dice cuánto entiendes, qué te falta y adapta tus lecciones a esa obra. En producción." /></a>
+<a href="https://www.youtube.com/@BlunderLing"><img src="assets/blunderling-2-en.svg" width="100%" alt="BlunderLing. Engine analysis happens once and is baked in; a GitHub Action does the rest every day." /></a>
 
-<a href="https://www.youtube.com/@BlunderLing"><img src="assets/blunderling-es.svg" width="100%" alt="BlunderLing. La fábrica de vídeos detrás del canal @BlunderLing. Tres Shorts de ajedrez al día: importados de datos abiertos, verificados con motor, renderizados, titulados y publicados sin que nadie mire. Coste por vídeo: cero." /></a>
+<img src="assets/agents-1-en.svg" width="100%" alt="Template_Agents. The code orchestrates. The model only reasons." />
 
-<a href="https://wavesling.pages.dev"><img src="assets/wavesling-es.svg" width="100%" alt="WavesLing. Puzle de tablero diario en el navegador, con motor propio. Un tablero de 5×5 donde cada marea mueve a la vez tus piezas y las del rival. Las reglas, la apertura y los precios se decidieron simulando partidas, no por gusto." /></a>
+<img src="assets/agents-2-en.svg" width="100%" alt="Template_Agents. Ports and adapters: the core never talks to a provider directly." />
 
-<a href="https://www.linkedin.com/in/brunomonrealpujol"><img src="assets/footer-es.svg" width="100%" alt="Hablemos de lo que quieres construir: mi LinkedIn" /></a>
+<a href="https://wavesbyling.com"><img src="assets/wavesling-1-en.svg" width="100%" alt="WavesLing. Draws fell from 71.9% to 23%." /></a>
+
+<a href="https://wavesbyling.com"><img src="assets/wavesling-2-en.svg" width="100%" alt="WavesLing. One engine, imported by everything else, so the rules can only live in one place." /></a>
+
+<a href="https://www.linkedin.com/in/brunomonrealpujol"><img src="assets/back-en.svg" width="100%" alt="Need the whole thing built? Let's talk." /></a>
