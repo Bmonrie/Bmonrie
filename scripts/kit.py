@@ -77,7 +77,7 @@ BASE_CSS = (
     "@keyframes spin{to{transform:rotate(360deg)}}"
     ".grow{transform-box:fill-box;transform-origin:50% 100%;animation:grow 1.1s cubic-bezier(.16,1,.3,1) backwards}"
     "@keyframes grow{from{transform:scaleY(0)}}"
-    "@media (prefers-reduced-motion:reduce){*{animation:none!important}}"
+    "@media (prefers-reduced-motion:reduce){*{animation:none!important}.packet{display:none}}"
 )
 
 _metrics = {}

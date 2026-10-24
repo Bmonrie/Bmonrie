@@ -35,6 +35,7 @@ CAP = 0.675  # altura de mayúscula de Anybody
 TXT = {
     "en": dict(
         name="English",
+        legend=('Core of the system', 'External service', 'Request or data flow'),
         alt_marquee="Tech I work with: Python, TypeScript, FastAPI, LangGraph, MCP, RAG, PostgreSQL, React, Docker and more",
         meta="AI & Data Manager · Barcelona",
         headline="Builds the whole thing.",
@@ -61,6 +62,7 @@ TXT = {
     ),
     "es": dict(
         name="Español",
+        legend=('Núcleo del sistema', 'Servicio externo', 'Petición o flujo de datos'),
         alt_marquee="Tecnologías con las que trabajo: Python, TypeScript, FastAPI, LangGraph, MCP, RAG, PostgreSQL, React, Docker y más",
         meta="AI & Data Manager · Barcelona",
         headline="Construye el sistema entero.",
@@ -87,6 +89,7 @@ TXT = {
     ),
     "ca": dict(
         name="Català",
+        legend=('Nucli del sistema', 'Servei extern', 'Petició o flux de dades'),
         alt_marquee="Tecnologies amb què treballo: Python, TypeScript, FastAPI, LangGraph, MCP, RAG, PostgreSQL, React, Docker i més",
         meta="AI & Data Manager · Barcelona",
         headline="Construeix el sistema sencer.",
@@ -136,13 +139,7 @@ PROJECTS = [
                  "reader": ("Read it with help", "A pop-up dictionary over the real page.")},
             mock={"nav": ["Home", "Levels", "Grammar", "Library", "Dictionary"], "common": "Common", "noun": "noun",
                   "meaning": "spider", "add": "Add to my words", "spider": "Spider"},
-            arch={"browser": ("Browser", "React 19 single-page app"), "cdn": ("Cloudflare", "CDN and TLS"),
-                  "host": "Hetzner · Docker Compose", "caddy": ("Caddy", "HTTPS and the static web"),
-                  "api": ("API", "FastAPI: study, reader, dictionary"), "ocr": ("OCR worker", "ONNX Runtime, one page at a time"),
-                  "db": ("PostgreSQL 17", "Users, progress, OCR queue"),
-                  "content": ("Read-only content", "JMdict, KANJIDIC and grammar"),
-                  "ships": "How it ships", "deploy": [("Push to pro", "The production branch"), ("Tests", "Backend, web and browser"),
-                             ("arm64 images", "Built and pushed"), ("Swap when healthy", "The old API keeps serving")]},
+            arch={'z_client': 'Client', 'z_edge': 'Edge', 'z_server': 'Server · Hetzner · Docker Compose', 'z_release': 'How it ships', 'browser': ('Browser', 'React 19 app'), 'cdn': ('Cloudflare', 'CDN and TLS'), 'caddy': ('Caddy', 'HTTPS, reverse proxy'), 'static': ('Static web', 'The built React app'), 'api': ('API', 'FastAPI: study, reader, dictionary'), 'content': ('Content', 'JMdict, KANJIDIC, grammar'), 'ocr': ('OCR worker', 'ONNX Runtime, page by page'), 'db': ('PostgreSQL 17', 'Users, progress, OCR queue'), 'deploy': [('Push to pro', 'The production branch'), ('Tests', 'Backend, web and browser'), ('arm64 images', 'Built and pushed'), ('Swap when healthy', 'The old API keeps serving')]},
         ),
         es=dict(
             what="Una plataforma de aprendizaje",
@@ -162,13 +159,7 @@ PROJECTS = [
                  "reader": ("Léela con ayuda", "Un diccionario emergente sobre la página real.")},
             mock={"nav": ["Inicio", "Niveles", "Gramática", "Biblioteca", "Diccionario"], "common": "Común",
                   "noun": "sustantivo", "meaning": "araña", "add": "Añadir a mis palabras", "spider": "Araña"},
-            arch={"browser": ("Navegador", "Aplicación React 19"), "cdn": ("Cloudflare", "CDN y TLS"),
-                  "host": "Hetzner · Docker Compose", "caddy": ("Caddy", "HTTPS y la web estática"),
-                  "api": ("API", "FastAPI: estudio, lector, diccionario"), "ocr": ("Proceso de OCR", "ONNX Runtime, página a página"),
-                  "db": ("PostgreSQL 17", "Usuarios, progreso, cola de OCR"),
-                  "content": ("Contenido fijo", "JMdict, KANJIDIC y gramática"),
-                  "ships": "Cómo se publica", "deploy": [("Push a pro", "La rama de producción"), ("Tests", "Backend, web y navegador"),
-                             ("Imágenes arm64", "Se construyen y suben"), ("Relevo en sano", "La API vieja sigue sirviendo")]},
+            arch={'z_client': 'Cliente', 'z_edge': 'Borde', 'z_server': 'Servidor · Hetzner · Docker Compose', 'z_release': 'Cómo se publica', 'browser': ('Navegador', 'Aplicación React 19'), 'cdn': ('Cloudflare', 'CDN y TLS'), 'caddy': ('Caddy', 'HTTPS, proxy inverso'), 'static': ('Web estática', 'La app React compilada'), 'api': ('API', 'FastAPI: estudio, lector, diccionario'), 'content': ('Contenido', 'JMdict, KANJIDIC, gramática'), 'ocr': ('Proceso de OCR', 'ONNX Runtime, página a página'), 'db': ('PostgreSQL 17', 'Usuarios, progreso, cola de OCR'), 'deploy': [('Push a pro', 'La rama de producción'), ('Tests', 'Backend, web y navegador'), ('Imágenes arm64', 'Se construyen y suben'), ('Relevo en sano', 'La API vieja sigue sirviendo')]},
         ),
         ca=dict(
             what="Una plataforma d'aprenentatge",
@@ -188,13 +179,7 @@ PROJECTS = [
                  "reader": ("Llegeix-la amb ajuda", "Un diccionari emergent sobre la pàgina real.")},
             mock={"nav": ["Inici", "Nivells", "Gramàtica", "Biblioteca", "Diccionari"], "common": "Comú",
                   "noun": "substantiu", "meaning": "aranya", "add": "Afegeix a la llista", "spider": "Aranya"},
-            arch={"browser": ("Navegador", "Aplicació React 19"), "cdn": ("Cloudflare", "CDN i TLS"),
-                  "host": "Hetzner · Docker Compose", "caddy": ("Caddy", "HTTPS i la web estàtica"),
-                  "api": ("API", "FastAPI: estudi, lector, diccionari"), "ocr": ("Procés d'OCR", "ONNX Runtime, pàgina a pàgina"),
-                  "db": ("PostgreSQL 17", "Usuaris, progrés, cua d'OCR"),
-                  "content": ("Contingut fix", "JMdict, KANJIDIC i gramàtica"),
-                  "ships": "Com es publica", "deploy": [("Push a pro", "La branca de producció"), ("Tests", "Backend, web i navegador"),
-                             ("Imatges arm64", "Es construeixen i es pugen"), ("Relleu en sa", "L'API vella continua servint")]},
+            arch={'z_client': 'Client', 'z_edge': 'Vora', 'z_server': 'Servidor · Hetzner · Docker Compose', 'z_release': 'Com es publica', 'browser': ('Navegador', 'Aplicació React 19'), 'cdn': ('Cloudflare', 'CDN i TLS'), 'caddy': ('Caddy', 'HTTPS, proxy invers'), 'static': ('Web estàtica', "L'app React compilada"), 'api': ('API', 'FastAPI: estudi, lector, diccionari'), 'content': ('Contingut', 'JMdict, KANJIDIC, gramàtica'), 'ocr': ("Procés d'OCR", 'ONNX Runtime, pàgina a pàgina'), 'db': ('PostgreSQL 17', "Usuaris, progrés, cua d'OCR"), 'deploy': [('Push a pro', 'La branca de producció'), ('Tests', 'Backend, web i navegador'), ('Imatges arm64', 'Es construeixen i es pugen'), ('Relleu en sa', "L'API vella continua servint")]},
         ),
     ),
     dict(
@@ -220,13 +205,7 @@ PROJECTS = [
                   "slots": [("13:17", "Which piece?", "One piece is covered and three are offered. Only one mates."),
                             ("18:17", "Brilliant or blunder?", "One move is drawn on the board. Half of them are traps."),
                             ("23:17", "The trap", "A real opening trap from a Lichess game, punished on screen.")]},
-            arch={"analyst": "Once: puzzles and their analysis, baked into the repo", "daily": "Every day, unattended", "baked": "baked analysis",
-                  "lichess": ("Lichess", "Puzzles and real games"), "stockfish": ("Stockfish", "Verifies and annotates"),
-                  "remotion": ("Remotion", "React, one per format"), "youtube": ("YouTube", "Data API upload"),
-                  "actions": ("GitHub Actions", "Three slots and catch-up runs"),
-                  "ledger": ("published.json", "The ledger: nothing goes out twice"), "actions_phone": ("GitHub Actions", "Renders with Remotion, three slots a day"),
-                  "weekly": "Every Monday", "stats": ("stats.ts", "Reads the ledger"),
-                  "analytics": ("YouTube Analytics", "Retention per video"), "statsjson": ("stats.json", "Week-on-week series")},
+            arch={'z_once': 'Once · baked into the repo', 'z_daily': 'Every day · GitHub Actions', 'z_weekly': 'Every Monday', 'baked': 'baked analysis', 'lichess': ('Lichess', 'Puzzles and real games'), 'stockfish': ('Stockfish', 'Verifies every line'), 'schedule': ('Scheduler', '13:17, 18:17, 23:17 Madrid'), 'remotion': ('Remotion', 'Renders the Short in React'), 'youtube': ('YouTube', 'Data API upload'), 'ledger': ('published.json', 'Nothing goes out twice'), 'stats': ('stats.ts', 'Reads the ledger'), 'analytics': ('YouTube Analytics', 'Retention per video'), 'statsjson': ('stats.json', 'Week-on-week series')},
         ),
         es=dict(
             what="Una cadena de vídeo automática",
@@ -248,13 +227,7 @@ PROJECTS = [
                   "slots": [("13:17", "¿Qué pieza?", "Una pieza está tapada y hay tres opciones. Solo una da mate."),
                             ("18:17", "¿Genial o error?", "Hay una jugada dibujada. La mitad son trampas."),
                             ("23:17", "La trampa", "Una trampa de apertura real de Lichess, castigada en pantalla.")]},
-            arch={"analyst": "Una vez: puzles y análisis, fijados en el repo", "daily": "Cada día, sin nadie", "baked": "análisis fijado",
-                  "lichess": ("Lichess", "Puzles y partidas reales"), "stockfish": ("Stockfish", "Verifica y anota"),
-                  "remotion": ("Remotion", "React, una por formato"), "youtube": ("YouTube", "Subida por Data API"),
-                  "actions": ("GitHub Actions", "Tres franjas y pasadas de recuperación"),
-                  "ledger": ("published.json", "El registro: nada sale dos veces"), "actions_phone": ("GitHub Actions", "Renderiza con Remotion, tres franjas al día"),
-                  "weekly": "Cada lunes", "stats": ("stats.ts", "Lee el registro"),
-                  "analytics": ("YouTube Analytics", "Retención por vídeo"), "statsjson": ("stats.json", "Serie semana a semana")},
+            arch={'z_once': 'Una vez · fijado en el repo', 'z_daily': 'Cada día · GitHub Actions', 'z_weekly': 'Cada lunes', 'baked': 'análisis fijado', 'lichess': ('Lichess', 'Puzles y partidas reales'), 'stockfish': ('Stockfish', 'Verifica cada línea'), 'schedule': ('Planificador', '13:17, 18:17, 23:17 Madrid'), 'remotion': ('Remotion', 'Renderiza el Short en React'), 'youtube': ('YouTube', 'Subida por Data API'), 'ledger': ('published.json', 'Nada sale dos veces'), 'stats': ('stats.ts', 'Lee el registro'), 'analytics': ('YouTube Analytics', 'Retención por vídeo'), 'statsjson': ('stats.json', 'Serie semana a semana')},
         ),
         ca=dict(
             what="Una cadena de vídeo automàtica",
@@ -276,13 +249,7 @@ PROJECTS = [
                   "slots": [("13:17", "Quina peça?", "Una peça està tapada i hi ha tres opcions. Només una fa mat."),
                             ("18:17", "Genial o error?", "Hi ha una jugada dibuixada. La meitat són paranys."),
                             ("23:17", "El parany", "Un parany d'obertura real de Lichess, castigat en pantalla.")]},
-            arch={"analyst": "Un cop: trencaclosques i anàlisi, fixats al repo", "daily": "Cada dia, sense ningú", "baked": "anàlisi fixada",
-                  "lichess": ("Lichess", "Trencaclosques i partides reals"), "stockfish": ("Stockfish", "Verifica i anota"),
-                  "remotion": ("Remotion", "React, una per format"), "youtube": ("YouTube", "Pujada per Data API"),
-                  "actions": ("GitHub Actions", "Tres franges i passades de recuperació"),
-                  "ledger": ("published.json", "El registre: res no surt dos cops"), "actions_phone": ("GitHub Actions", "Renderitza amb Remotion, tres franges al dia"),
-                  "weekly": "Cada dilluns", "stats": ("stats.ts", "Llegeix el registre"),
-                  "analytics": ("YouTube Analytics", "Retenció per vídeo"), "statsjson": ("stats.json", "Sèrie setmana a setmana")},
+            arch={'z_once': 'Un cop · fixat al repo', 'z_daily': 'Cada dia · GitHub Actions', 'z_weekly': 'Cada dilluns', 'baked': 'anàlisi fixada', 'lichess': ('Lichess', 'Trencaclosques i partides reals'), 'stockfish': ('Stockfish', 'Verifica cada línia'), 'schedule': ('Planificador', '13:17, 18:17, 23:17 Madrid'), 'remotion': ('Remotion', 'Renderitza el Short en React'), 'youtube': ('YouTube', 'Pujada per Data API'), 'ledger': ('published.json', 'Res no surt dos cops'), 'stats': ('stats.ts', 'Llegeix el registre'), 'analytics': ('YouTube Analytics', 'Retenció per vídeo'), 'statsjson': ('stats.json', 'Sèrie setmana a setmana')},
         ),
     ),
     dict(
@@ -311,7 +278,7 @@ PROJECTS = [
                   "answer": "It shipped on Tuesday and should arrive on Friday. Returns are free for 30 days.",
                   "cite": "1 · shipping-policy.pdf", "input": "Message the support agent"},
             arch={"clients": ("Clients", [("Agent author", "YAML, prompts"), ("Web app", "Next.js"), ("API clients", "HTTP, SSE"), ("CI", "evals")]),
-                  "core": ("Core", [("Runtime", "checkpoints"), ("Policies", "allow, ask"), ("Memory", "recall"), ("Multi-agent", "transfer")]),
+                  "core": ("Core · no provider SDKs", [("Runtime", "checkpoints"), ("Policies", "allow, ask"), ("Memory", "recall"), ("Multi-agent", "transfer")]),
                   "adapters": ("Adapters", [("Models", "any provider"), ("Tools", "local, MCP"), ("Knowledge", "hybrid"), ("Telemetry", "OTel")]),
                   "external": ("External", [("LLMs", "APIs, local"), ("MCP servers", "remote"), ("Postgres", "pgvector"), ("Langfuse", "traces")]),
                   "calls": {"clients": "run", "core": "calls through ports", "adapters": "replaceable by configuration"}},
@@ -339,7 +306,7 @@ PROJECTS = [
                   "answer": "Salió el martes y debería llegar el viernes. Las devoluciones son gratis durante 30 días.",
                   "cite": "1 · shipping-policy.pdf", "input": "Escribe al agente de soporte"},
             arch={"clients": ("Clientes", [("Autor del agente", "YAML, prompts"), ("Web", "Next.js"), ("Clientes API", "HTTP, SSE"), ("CI", "evals")]),
-                  "core": ("Núcleo", [("Runtime", "checkpoints"), ("Políticas", "permitir, preguntar"), ("Memoria", "recuerdo"), ("Multiagente", "traspaso")]),
+                  "core": ("Núcleo · sin SDKs de proveedor", [("Runtime", "checkpoints"), ("Políticas", "permitir, preguntar"), ("Memoria", "recuerdo"), ("Multiagente", "traspaso")]),
                   "adapters": ("Adaptadores", [("Modelos", "cualquiera"), ("Herramientas", "locales, MCP"), ("Conocimiento", "híbrido"), ("Telemetría", "OTel")]),
                   "external": ("Externo", [("LLMs", "APIs, locales"), ("Servidores MCP", "remotos"), ("Postgres", "pgvector"), ("Langfuse", "trazas")]),
                   "calls": {"clients": "ejecutan", "core": "llama por puertos", "adapters": "se cambian por configuración"}},
@@ -367,7 +334,7 @@ PROJECTS = [
                   "answer": "Va sortir dimarts i hauria d'arribar divendres. Les devolucions són gratuïtes durant 30 dies.",
                   "cite": "1 · shipping-policy.pdf", "input": "Escriu a l'agent de suport"},
             arch={"clients": ("Clients", [("Autor de l'agent", "YAML, prompts"), ("Web", "Next.js"), ("Clients API", "HTTP, SSE"), ("CI", "evals")]),
-                  "core": ("Nucli", [("Runtime", "checkpoints"), ("Polítiques", "permet, pregunta"), ("Memòria", "record"), ("Multiagent", "traspàs")]),
+                  "core": ("Nucli · sense SDKs de proveïdor", [("Runtime", "checkpoints"), ("Polítiques", "permet, pregunta"), ("Memòria", "record"), ("Multiagent", "traspàs")]),
                   "adapters": ("Adaptadors", [("Models", "qualsevol"), ("Eines", "locals, MCP"), ("Coneixement", "híbrid"), ("Telemetria", "OTel")]),
                   "external": ("Extern", [("LLMs", "APIs, locals"), ("Servidors MCP", "remots"), ("Postgres", "pgvector"), ("Langfuse", "traces")]),
                   "calls": {"clients": "executen", "core": "crida per ports", "adapters": "es canvien per configuració"}},
@@ -394,11 +361,7 @@ PROJECTS = [
             mock={"tabs": ["classic", "arcade", "crowd"], "heading": "each piece keeps its move",
                   "body": "A rook is still a rook. You send a tide, and every piece that travels that way goes at once.",
                   "caption": "rook · straight, until something stops it", "pad": "Eight directions"},
-            arch={"engine": ("Engine", "Pure TypeScript, zero dependencies"), "others": ("Everything else", "Game modes, generator and simulator"),
-                  "web": ("Web app and server", "React, Vite, Cloudflare"), "server": ("Server", "Cloudflare, leaderboards only"),
-                  "game": ("Game modes", "Daily, arcade, duel and Elo"), "generator": ("Generator", "Writes the puzzle bank"),
-                  "autoplay": ("Simulator", "AI against AI, to measure the rules"), "tests": ("Tests", "Normative vectors"),
-                  "imports": "import"},
+            arch={'z_repo': 'One TypeScript monorepo', 'web': ('Web app and server', 'React, Vite, Cloudflare'), 'game': ('Game modes', 'Daily, arcade, duel, Elo'), 'engine': ('Engine', 'tide.ts, zero dependencies'), 'autoplay': ('Simulator', 'AI against AI'), 'generator': ('Generator', 'Writes the daily puzzles'), 'bank': ('Puzzle bank', 'Immutable snapshot in git'), 'others': ('Everything else', 'Game modes, generator, simulator')},
         ),
         es=dict(
             what="Un juego de navegador",
@@ -418,11 +381,7 @@ PROJECTS = [
             mock={"tabs": ["classic", "arcade", "crowd"], "heading": "cada pieza conserva su movimiento",
                   "body": "Una torre sigue siendo una torre. Envías una marea y todas las piezas que van en esa dirección se mueven a la vez.",
                   "caption": "torre · recto, hasta que algo la para", "pad": "Ocho direcciones"},
-            arch={"engine": ("Motor", "TypeScript puro, sin dependencias"), "others": ("Todo lo demás", "Modos de juego, generador y simulador"),
-                  "web": ("Web y servidor", "React, Vite, Cloudflare"), "server": ("Servidor", "Cloudflare, solo clasificaciones"),
-                  "game": ("Modos de juego", "Diario, arcade, duelo y Elo"), "generator": ("Generador", "Escribe el banco de puzles"),
-                  "autoplay": ("Simulador", "IA contra IA, para medir las reglas"), "tests": ("Tests", "Vectores normativos"),
-                  "imports": "importan"},
+            arch={'z_repo': 'Un monorepo en TypeScript', 'web': ('Web y servidor', 'React, Vite, Cloudflare'), 'game': ('Modos de juego', 'Diario, arcade, duelo, Elo'), 'engine': ('Motor', 'tide.ts, sin dependencias'), 'autoplay': ('Simulador', 'IA contra IA'), 'generator': ('Generador', 'Escribe los puzles diarios'), 'bank': ('Banco de puzles', 'Instantánea inmutable en git'), 'others': ('Todo lo demás', 'Modos de juego, generador, simulador')},
         ),
         ca=dict(
             what="Un joc de navegador",
@@ -442,11 +401,7 @@ PROJECTS = [
             mock={"tabs": ["classic", "arcade", "crowd"], "heading": "cada peça conserva el seu moviment",
                   "body": "Una torre continua sent una torre. Hi envies una marea i totes les peces que van en aquella direcció es mouen alhora.",
                   "caption": "torre · recte, fins que alguna cosa l'atura", "pad": "Vuit direccions"},
-            arch={"engine": ("Motor", "TypeScript pur, sense dependències"), "others": ("Tota la resta", "Modes de joc, generador i simulador"),
-                  "web": ("Web i servidor", "React, Vite, Cloudflare"), "server": ("Servidor", "Cloudflare, només classificacions"),
-                  "game": ("Modes de joc", "Diari, arcade, duel i Elo"), "generator": ("Generador", "Escriu el banc de trencaclosques"),
-                  "autoplay": ("Simulador", "IA contra IA, per mesurar les regles"), "tests": ("Tests", "Vectors normatius"),
-                  "imports": "importen"},
+            arch={'z_repo': 'Un monorepo en TypeScript', 'web': ('Web i servidor', 'React, Vite, Cloudflare'), 'game': ('Modes de joc', 'Diari, arcade, duel, Elo'), 'engine': ('Motor', 'tide.ts, sense dependències'), 'autoplay': ('Simulador', 'IA contra IA'), 'generator': ('Generador', 'Escriu els trencaclosques diaris'), 'bank': ('Banc de trencaclosques', 'Instantània immutable a git'), 'others': ('Tota la resta', 'Modes de joc, generador, simulador')},
         ),
     ),
 ]
@@ -460,10 +415,10 @@ for _p in PROJECTS:
 
 GROUND = {"kakurega": PAPER, "blunderling": STONE, "agents": PAPER, "wavesling": STONE}
 # Cómo funciona cada proyecto: los iconos de sus cuatro pasos y cuál va en azul
-STEP_ICONS = {"kakurega": (["book", "gauge", "cards", "reader"], 2),
-              "blunderling": (["database", "engine", "phone", "upload"], 3),
-              "agents": (["folder", "loop", "shield", "models"], 1),
-              "wavesling": (["pad", "tide", "versus", "bars"], 3)}
+STEP_ICONS = {"kakurega": (["book", "chart", "layers", "browser"], 2),
+              "blunderling": (["board", "search", "film", "play"], 3),
+              "agents": (["file", "loop", "shield", "spark"], 1),
+              "wavesling": (["grid", "swap", "loop", "chart"], 3)}
 TECH = ["Python", "TypeScript", "FastAPI", "LangGraph", "MCP", "RAG", "pgvector", "PostgreSQL", "vLLM", "Next.js",
         "React", "Remotion", "ONNX Runtime", "FSRS", "Stockfish", "Docker", "GitHub Actions", "OpenTelemetry",
         "Langfuse", "Cloudflare"]
@@ -643,7 +598,7 @@ def feature_b(lang, p, phone=False):
     b.append(f'<g transform="translate({m} {top})">{st}</g>')
     c, y = caption(m, top + sh + 34, P["fig_caption"], cw, phone=phone)
     b.append(c)
-    arch, ah = getattr(diagrams, p["key"])(dict(arch=P["arch"]), phone)
+    arch, ah = getattr(diagrams, p["key"])(dict(arch=P["arch"], legend=L["legend"]), phone)
     top = y + (30 if phone else 40)
     b.append(f'<g transform="translate({m} {top:.0f})">{arch}</g>')
     c, y = caption(m, top + ah + 34, P["arch_caption"], cw, phone=phone)
@@ -675,7 +630,7 @@ def feature_b(lang, p, phone=False):
         b.append(text(m, y, L["private"], 22 if phone else 24, MUTED, 700))
     alt = (f'{p["name"]}. {P["fig_caption"]} {P["arch_caption"]} '
            + " ".join(f.replace("**", "") for f in P["facts"]))
-    return svg(y + (30 if phone else 44), "".join(b), alt, GROUND[p["key"]], w)
+    return svg(y + (30 if phone else 44), "".join(b), alt, PAPER, w)
 
 
 def back(lang, phone=False):
